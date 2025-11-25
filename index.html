@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Lịch Sử Thế Giới</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="background:url(./images/anh-nen-powerpoint-lich-su-19.jpg);">
+
+<header>
+    <h1>Lịch Sử Thế Giới</h1>
+    <nav>
+        <a href="#home">Trang chủ</a>
+        <a href="#video">Video</a>
+        <a href="#resources">Tài nguyên</a>
+    </nav>
+</header>
+
+<!-- TRANG CHỦ -->
+<section id="home" class="container">
+    <h2 class="section-title">Danh mục thời kỳ lịch sử</h2>
+
+    <div class="card-list">
+        <div class="card">
+            <img src="images/a1_6.webp" alt="Cổ đại">
+            <h3>Cổ đại</h3>
+        </div>
+        <div class="card">
+            <img src="images/職貢圖（仇英）3.jpg" alt="Trung đại">
+            <h3>Trung đại</h3>
+        </div>
+        <div class="card">
+            <img src="images/phao_tan_cong_thuan_an_400.jpg" alt="Cận đại">
+            <h3>Cận đại</h3>
+        </div>
+        <div class="card">
+            <img src="images/diem-nhan-kinh-te-viet-nam-tu-sau-cach-mang-thang-tam-nam-1945-den-nay-15-.3417.png" alt="Hiện đại">
+            <h3>Hiện đại</h3>
+        </div>
+    </div>
+
+    <h2 class="section-title" style="margin-top:40px;">Video nổi bật</h2>
+
+    <div class="card-list">
+        <div class="card ">
+           <video src="videos/YTSave.com_Shorts_The-chien-II-nhin-lai-cac-con-so-THLC_Media_yap8GyLwjmA_002_720p.mp4" width="100%" controls></video>
+           <audio src="audios/YTSave.com_Shorts_The-chien-II-nhin-lai-cac-con-so-THLC_Media_yap8GyLwjmA_007_48k.m4a"></audio>
+           <h3>Chiến Tranh Thế Giới Thứ Hai </h3>
+        </div>
+        <div class="card">
+            <video src="videos/YTSave.com_Shorts_Cac-nen-van-minh-co-tren-the-gioi-va-Vie_Media_bB2Q-MagQf4_002_720p.mp4" width="100%" controls></video>
+            <audio src="audios/YTSave.com_Shorts_Cac-nen-van-minh-co-tren-the-gioi-va-Vie_Media_bB2Q-MagQf4_007_48k.m4a"></audio>
+            <h3>Các nền văn minh cổ</h3>
+        </div>
+        <div class="card">
+            <video src="videos/Download.mp4" width="100%" controls></video>
+            <audio src="audios/Download.mp4"></audio>
+            <h3>Khai phá địa lý</h3>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- VIDEO CHI TIẾT -->
+<section id="video" class="container">
+    <h2 class="section-title">Video chi tiết</h2>
+
+    <div class="card">
+        <video src="videos/YTSave.com_YouTube_Toan-canh-Chien-tranh-The-gioi-thu-2_Media_G4b94C0r1jY_003_360p.mp4" width="100%" controls></video>
+        <audio src="audios/YTSave.com_YouTube_Toan-canh-Chien-tranh-The-gioi-thu-2_Media_G4b94C0r1jY_006_48k.m4a"></audio>
+    </div>
+
+    <div class="timeline">
+        <h3>Timeline sự kiện</h3>
+        <div class="event">• 1939: Đức Tấn Công Ba Lan</div>
+        <div class="event">• 1941: Phát Xít Tấn Công Liên Xô</div>
+        <div class="event">• 1942: Chiến thắng Stalingrad</div>
+         <div class="event">• 1943-1945: Hít Le Bị Tiêu Diệt</div>
+          <div class="event">• 1945: Chiến Tranh Thứ Hai Kết Thúc</div>
+    </div>
+
+    <div class="quiz-box">
+    <h3>Quiz kiểm tra kiến thức 📝</h3>
+    <div id="quiz-container"></div>
+    <p id="score" style="margin-top: 20px; font-weight: bold;"></p>
+</div>
+
+<script>
+const quizData = [
+    {
+        question: "Chiến tranh thế giới thứ hai bắt đầu năm nào?",
+        options: ["1939", "1914", "1912", "1920"],
+        answer: "1939"
+    },
+    {
+        question: "Ai là người phát minh ra máy in?",
+        options: ["Johannes Gutenberg", "Albert Einstein", "Isaac Newton", "Leonardo da Vinci"],
+        answer: "Johannes Gutenberg"
+    },
+    {
+        question: "Nền văn minh Ai Cập nổi tiếng với công trình gì?",
+        options: ["Kim tự tháp", "Vạn lý trường thành", "Colosseum", "Stonehenge"],
+        answer: "Kim tự tháp"
+    }
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+function loadQuestion() {
+    const container = document.getElementById('quiz-container');
+    container.innerHTML = "";
+
+    if(currentQuestion < quizData.length){
+        const q = quizData[currentQuestion];
+        const questionEl = document.createElement('p');
+        questionEl.textContent = q.question;
+        container.appendChild(questionEl);
+
+        q.options.forEach(option => {
+            const btn = document.createElement('button');
+            btn.textContent = option;
+            btn.onclick = () => checkAnswer(option);
+            btn.style.margin = "5px";
+            container.appendChild(btn);
+        });
+
+        const resultEl = document.createElement('p');
+        resultEl.id = "result";
+        resultEl.style.marginTop = "10px";
+        container.appendChild(resultEl);
+    } else {
+        document.getElementById('quiz-container').innerHTML = "<h3>Quiz hoàn tất!</h3>";
+        document.getElementById('score').textContent = `Bạn trả lời đúng ${score} trên ${quizData.length} câu. 🎉`;
+    }
+}
+
+function checkAnswer(selected) {
+    const q = quizData[currentQuestion];
+    const result = document.getElementById('result');
+
+    if(selected === q.answer){
+        result.textContent = "🎉 Đúng rồi!";
+        result.style.color = "green";
+        score++;
+    } else {
+        result.textContent = `❌ Sai! Đáp án đúng: ${q.answer}`;
+        result.style.color = "red";
+    }
+
+    // Tắt tất cả button
+    const buttons = document.querySelectorAll('#quiz-container button');
+    buttons.forEach(btn => btn.disabled = true);
+
+    // Chuyển sang câu tiếp theo sau 1 giây
+    setTimeout(() => {
+        currentQuestion++;
+        loadQuestion();
+    }, 1000);
+}
+
+// Load câu hỏi đầu tiên
+loadQuestion();
+</script>
+</section>
+
+<!-- TÀI NGUYÊN -->
+<section id="resources" class="container">
+    <h2 class="section-title">Tài nguyên</h2>
+
+    <div class="ebook">
+        <h3>Lịch sử cổ đại 📜</h3>
+    <p>Bạn có thể tải sách điện tử về lịch sử cổ đại tại đây:</p>
+    <a href="files/Lịch sử thế giới cổ đại - Vũ Lương Ninh - 2005.pdf" download>
+        <button>Tải sách Lịch sử Cổ đại</button>
+    </a>
+    </div>
+
+    <div class="map">
+    <h3>Bản đồ tương tác 🗺️</h3>
+    <p>Khám phá các bản đồ thời kỳ lịch sử:</p>
+    <a href="https://www.davidrumsey.com/" target="_blank">
+        <button>Xem bản đồ tương tác</button>
+    </div>
+
+    <div class="forum-box">
+        <a href=""></a>
+        <h2>Diễn đàn thảo luận 💬</h2>
+        <form id="comment-form">
+        <input type="text" id="username" placeholder="Tên của bạn" required><br>
+        <textarea id="comment" placeholder="Viết bình luận..." required></textarea><br>
+        <button type="submit">Gửi bình luận</button>
+    </form>
+
+    <div id="comments-section">
+        <h3>Bình luận gần đây:</h3>
+        <ul id="comments-list"></ul>
+    </div>
+</div>
+
+<script>
+const form = document.getElementById('comment-form');
+const commentsList = document.getElementById('comments-list');
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault(); // Ngăn reload trang
+
+    const username = document.getElementById('username').value.trim();
+    const comment = document.getElementById('comment').value.trim();
+
+    if(username && comment) {
+        const li = document.createElement('li');
+        const timestamp = new Date();
+        const timeString = timestamp.toLocaleString('vi-VN', { hour12: false });
+
+        li.innerHTML = `<strong>${username}</strong> <span class="time">[${timeString}]</span>: <br>${comment}`;
+        commentsList.prepend(li); // Hiển thị comment mới lên đầu
+
+        form.reset(); // Xóa nội dung form
+    }
+});
+</script>
+
+</body>
+</html>
+        </a>
+        </form>
+    </div>
+</section>
+
+<footer>
+    © 2025 - Website học lịch sử thế giới qua video
+</footer>
+
+</body>
+</html> 
